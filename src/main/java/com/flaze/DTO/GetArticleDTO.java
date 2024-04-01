@@ -14,6 +14,7 @@ import java.util.Optional;
 @NoArgsConstructor
 public class GetArticleDTO { // DTO для того чтобы получать статью по ее id
 
+    private Long id;
     private String title;
     private String description;
     private String text;
@@ -22,6 +23,7 @@ public class GetArticleDTO { // DTO для того чтобы получать 
     public static GetArticleDTO toModel(Optional<ArticleEntity> article) {
         GetArticleDTO getArticleDTO = new GetArticleDTO();
 
+        getArticleDTO.setId(article.get().getId());
         getArticleDTO.setTitle(article.get().getTitle());
         getArticleDTO.setDescription(article.get().getDescription());
         getArticleDTO.setText(article.get().getText());

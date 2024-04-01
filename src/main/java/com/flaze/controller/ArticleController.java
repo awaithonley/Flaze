@@ -58,8 +58,8 @@ public class ArticleController {
     public ResponseEntity deleteUserPage(@PathVariable Long id) {
         try {
             articleService.deleteArticle(id);
-            Response response = new Response("Статься успешно удалена", 204);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+            Response response = new Response("Статься успешно удалена", 200);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (ArticleNotFoundException e) {
             Response response = new Response("Ошибка при удалений статьи", 500);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

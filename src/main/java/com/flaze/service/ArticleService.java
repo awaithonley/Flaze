@@ -40,6 +40,7 @@ public class ArticleService {
 
         for (ArticleEntity article: articleEntities) {
             articles.add(GetArticleDTO.builder().
+                    id(article.getId()).
                     title(article.getTitle()).
                     description(article.getDescription()).
                     text(article.getText()).
@@ -57,6 +58,7 @@ public class ArticleService {
 
         for (ArticleEntity article: articleEntities) {
             articles.add(GetArticleDTO.builder().
+                    id(article.getId()).
                     title(article.getTitle()).
                     description(article.getDescription()).
                     text(article.getText()).
@@ -94,22 +96,30 @@ public class ArticleService {
         return savedArticle;
     }
 
-    public ArticleDTO getArticle(Long id) throws ArticleNotFoundException {
-        if (!(articleRepository.existsById(id))) {
+    public GetArticleDTO getArticle(Long id) throws ArticleNotFoundException {
+        Optional<ArticleEntity> articleOptional = articleRepository.findById(id);
+        if (articleOptional.isEmpty()) {
             throw new ArticleNotFoundException("Статья с id " + id + " не найдена");
         }
 
-        Optional<ArticleEntity> article = articleRepository.findById(id);
-
-        return ArticleDTO.toModel(article);
+        ArticleEntity article = articleOptional.get();
+        return GetArticleDTO.builder()
+                .id(article.getId())
+                .title(article.getTitle())
+                .description(article.getDescription())
+                .text(article.getText())
+                .authorId(article.getAuthor().getId())
+                .build();
     }
 
     public void deleteArticle(Long id) throws ArticleNotFoundException {
-        if (!(articleRepository.existsById(id))) {
+        Optional<ArticleEntity> articleOptional = articleRepository.findById(id);
+        if (articleOptional.isEmpty()) {
             throw new ArticleNotFoundException("Статья с id " + id + " не найдена");
         }
 
         articleRepository.deleteById(id);
     }
+
 
 }
