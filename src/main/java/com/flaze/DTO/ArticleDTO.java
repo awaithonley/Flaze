@@ -17,7 +17,6 @@ public class ArticleDTO {
     private String title;
     private String description;
     private String text;
-    private Long authorId;
 
     public static ArticleDTO toModel(Optional<ArticleEntity> article) {
         ArticleDTO articleDTO = new ArticleDTO();

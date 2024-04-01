@@ -1,6 +1,7 @@
 package com.flaze.service;
 
 import com.flaze.DTO.ArticleDTO;
+import com.flaze.DTO.GetArticleDTO;
 import com.flaze.DTO.UserDTO;
 import com.flaze.entity.ArticleEntity;
 import com.flaze.entity.UserEntity;
@@ -32,13 +33,13 @@ public class ArticleService {
         this.userRepository = userRepository;
     }
 
-    public List<ArticleDTO> getAllArticles() {
+    public List<GetArticleDTO> getAllArticles() {
         List<ArticleEntity> articleEntities = articleRepository.findAll();
 
-        List<ArticleDTO> articles = new ArrayList<>();
+        List<GetArticleDTO> articles = new ArrayList<>();
 
         for (ArticleEntity article: articleEntities) {
-            articles.add(ArticleDTO.builder().
+            articles.add(GetArticleDTO.builder().
                     title(article.getTitle()).
                     description(article.getDescription()).
                     text(article.getText()).
@@ -49,13 +50,13 @@ public class ArticleService {
         return articles;
     }
 
-    public List<ArticleDTO> getAllArticles(Long id) {
+    public List<GetArticleDTO> getAllArticles(Long id) {
         List<ArticleEntity> articleEntities = articleRepository.findByAuthorId(id);
 
-        List<ArticleDTO> articles = new ArrayList<>();
+        List<GetArticleDTO> articles = new ArrayList<>();
 
         for (ArticleEntity article: articleEntities) {
-            articles.add(ArticleDTO.builder().
+            articles.add(GetArticleDTO.builder().
                     title(article.getTitle()).
                     description(article.getDescription()).
                     text(article.getText()).

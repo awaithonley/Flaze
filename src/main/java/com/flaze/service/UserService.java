@@ -57,6 +57,7 @@ public class UserService {
                 username(user.get().getUsername()).
                 age(user.get().getAge()).
                 email(user.get().getEmail()).
+                articles(articleService.getAllArticles(user.get().getId())).
                 build();
     }
 

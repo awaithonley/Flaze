@@ -19,5 +19,5 @@ public class GetUserDTO { // DTO для того чтобы получать п�
     private String username;
     private Integer age;
     private String email;
-    private List<ArticleDTO> articles;
+    private List<GetArticleDTO> articles;
 }
